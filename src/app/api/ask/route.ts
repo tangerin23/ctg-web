@@ -2,7 +2,7 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
 
-export const runtime = "nodejs"; // まずは安定の Node 実行
+export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   try {
@@ -22,10 +22,9 @@ export async function POST(req: Request) {
     });
 
     return Response.json({ ok: true, text });
-  } catch (err: any) {
-    return Response.json(
-      { ok: false, error: err?.message ?? "UNKNOWN_ERROR" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {                           // ← ここを unknown に
+    const message = err instanceof Error ? err.message : "UNKNOWN_ERROR";
+    return Response.json({ ok: false, error: message }, { status: 500 });
   }
+}
 }
