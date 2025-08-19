@@ -1,10 +1,16 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
+
 export const runtime = "nodejs";
+
+type AskBody = { prompt?: unknown };
+
 export async function POST(req: Request) {
-try {
-   const body = await req.json().catch(() => ({} as Record<string, unknown>));
-   const prompt = String((body as Record<string, unknown>)?.prompt ?? "").trim();
+  try {
+    const body = (await req.json().catch(() => ({}))) as AskBody;
+    const raw = body?.prompt;
+    const prompt =
+      typeof raw === "string" ? raw.trim() : String(raw ?? "").trim();
 
     if (!prompt) {
       return Response.json({ ok: false, error: "EMPTY_PROMPT" }, { status: 400 });
