@@ -1,13 +1,10 @@
-// src/app/api/ask/route.ts
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
-
 export const runtime = "nodejs";
-
 export async function POST(req: Request) {
-  try {
-    const body = await req.json().catch(() => ({}));
-    const prompt = (body?.prompt ?? "").toString().trim();
+try {
+   const body = await req.json().catch(() => ({} as Record<string, unknown>));
+   const prompt = String((body as Record<string, unknown>)?.prompt ?? "").trim();
 
     if (!prompt) {
       return Response.json({ ok: false, error: "EMPTY_PROMPT" }, { status: 400 });
@@ -22,9 +19,8 @@ export async function POST(req: Request) {
     });
 
     return Response.json({ ok: true, text });
-  } catch (err: unknown) {                           // ← ここを unknown に
+  } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "UNKNOWN_ERROR";
     return Response.json({ ok: false, error: message }, { status: 500 });
   }
-}
 }
