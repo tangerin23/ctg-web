@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import AskAIMinimal from "@/components/AskAIMinimal"; // パスエラーなら "../components/AskAIMinimal"
+
 
 /* ──────────────────────────────────────────────────────────────
    Header
@@ -84,7 +86,14 @@ function HeroSection() {
     </section>
   );
 }
-
+<section id="askai" className="py-10">
+  <div className="mx-auto max-w-7xl px-4">
+    <h2 className="text-xl font-semibold text-white/90">Ask AI</h2>
+    <div className="mt-3">
+      <AskAIMinimal />
+    </div>
+  </div>
+</section>
 
 // ──────────────────────────────────────────────────────────────
 // Latest News（Publications / 
