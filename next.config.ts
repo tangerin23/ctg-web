@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // ESLint/TS のエラーで本番ビルドを止めない
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },   // ESLintエラーで本番ビルドを止めない
+  typescript: { ignoreBuildErrors: true } // TSエラーで本番ビルドを止めない
 };
 
 export default nextConfig;
