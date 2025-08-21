@@ -461,3 +461,13 @@ export default function Page() {
     </main>
   );
 }
+import AskAIMinimal from '@/components/AskAIMinimal';
+
+export default function Page() {
+  return (
+    <main className="p-6">
+      {/* …既存コンテンツ… */}
+      <AskAIMinimal />
+    </main>
+  );
+}
